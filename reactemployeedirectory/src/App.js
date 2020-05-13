@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import employees from './employeeInfo.json';
+import FriendCard from "./components/FriendCard";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  // Setting this.state.friends to the friends json array
+  state = {
+    employees
+  };
+
+  removeFriend = id => {
+    // Filter this.state.friends for friends with an id not equal to the id being removed
+    const friends = this.state.friends.filter(friend => friend.id !== id);
+    // Set this.state.friends equal to the new friends array
+    this.setState({ friends });
+  };
+
+  // Map over this.state.friends and render a FriendCard component for each friend object
+  render() {
+    return (
+      <div>
+      <p>some text</p>
+      <p>
+        {this.state.employees.map(employees => (
+        <FriendCard
+          removeFriend={this.removeFriend}
+          id={employees.id}
+          key={employees.id}
+          name={employees.name}
+          image={employees.image}
+          occupation={employees.occupation}
+          location={employees.location}
+        />
+      ))}
+      </p>
+      </div>
+      //  <Wrapper>
+      //    <Title>employeess List</Title>
+      //   {this.state.employeess.map(friend => (
+      //     <FriendCard
+      //       removeFriend={this.removeFriend}
+      //       id={friend.id}
+      //       key={friend.id}
+      //       name={friend.name}
+      //       image={friend.image}
+      //       occupation={friend.occupation}
+      //       location={friend.location}
+      //     />
+      //   ))}
+      // </Wrapper>
+    );
+  }
 }
 
 export default App;

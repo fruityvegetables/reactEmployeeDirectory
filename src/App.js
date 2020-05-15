@@ -18,10 +18,10 @@ class App extends Component {
   searchTerm = event => {
     console.log(event.target.value);
     if(event.target.value === "" || event.target.value === " "){
-      console.log("something");
+     // console.log("something");
       this.setState({employees})
     } else {
-      console.log("somethingeEsse");
+      //console.log("somethingeEsse");
       const filteredEmployees = this.state.employees.filter(employees => employees.occupation.includes(event.target.value));
       this.setState({employees: filteredEmployees});
     }
@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <p>some text</p>
+      <p>Below, you can search for an employee according to their occupation!</p>
       <input type= "text" onChange= {this.searchTerm} />
       <p>
         {this.state.employees.map(employees => (
